@@ -932,6 +932,9 @@ const deepseekModelOptions = {
 		reservedOutputTokenSpace: 8_000, // 8_000,
 		cost: { cache_read: .07, input: .27, output: 1.10, },
 		downloadable: false,
+		supportsFIM: true,
+		specialToolFormat: 'openai-style', // 添加OpenAI风格工具调用支持
+		supportsSystemMessage: 'separated',
 	},
 	'deepseek-reasoner': {
 		...openSourceModelOptions_assumingOAICompat.deepseekCoderV2,
@@ -939,6 +942,21 @@ const deepseekModelOptions = {
 		reservedOutputTokenSpace: 8_000, // 8_000,
 		cost: { cache_read: .14, input: .55, output: 2.19, },
 		downloadable: false,
+		specialToolFormat: 'openai-style',
+		supportsSystemMessage: 'separated',
+		// 添加推理能力配置
+		reasoningCapabilities: {
+			supportsReasoning: true,
+			canTurnOffReasoning: false,
+			canIOReasoning: true,
+			reasoningReservedOutputTokenSpace: 8192,
+			reasoningSlider: {
+				type: 'budget_slider',
+				min: 1024,
+				max: 8192,
+				default: 1024
+			},
+		},
 	},
 } as const satisfies { [s: string]: VoidStaticModelInfo }
 

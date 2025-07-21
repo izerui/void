@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# 进入项目根目录
+cd "$(dirname "$0")/.."
+
 # 构建 Void 编辑器
 echo "开始构建 Void 编辑器..."
+
 sudo npm run compile
 
 # 检测平台和架构
