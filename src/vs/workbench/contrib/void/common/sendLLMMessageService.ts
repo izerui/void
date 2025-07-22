@@ -127,6 +127,17 @@ export class LLMMessageService extends Disposable implements ILLMMessageService 
 		this.llmMessageHooks.onError[requestId] = onError
 		this.llmMessageHooks.onAbort[requestId] = onAbort // used internally only
 
+		// 使用更安全的方式进行调试日志
+		if (typeof console !== 'undefined' && console.log) {
+			console.log('======================================================')
+			console.log('参数 proxyParams: ', proxyParams)
+			console.log('参数 requestId: ', requestId)
+			console.log('参数 settingsOfProvider: ', settingsOfProvider)
+			console.log('参数 modelSelection: ', modelSelection)
+			console.log('参数 mcpTools: ', mcpTools)
+			console.log('======================================================')
+		}
+
 		// params will be stripped of all its functions over the IPC channel
 		this.channel.call('sendLLMMessage', {
 			...proxyParams,
