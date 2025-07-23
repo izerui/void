@@ -927,12 +927,12 @@ const geminiSettings: VoidStaticProviderInfo = {
 // ---------------- DEEPSEEK API ----------------
 const deepseekModelOptions = {
 	'deepseek-chat': {
-		...openSourceModelOptions_assumingOAICompat.deepseekR1,
+		...openSourceModelOptions_assumingOAICompat.deepseekCoderV2,
 		contextWindow: 64_000, // https://api-docs.deepseek.com/quick_start/pricing
 		reservedOutputTokenSpace: 8_000, // 8_000,
 		cost: { cache_read: .07, input: .27, output: 1.10, },
 		downloadable: false,
-		supportsFIM: true,
+		supportsFIM: false,
 		specialToolFormat: 'openai-style', // 添加OpenAI风格工具调用支持
 		supportsSystemMessage: 'separated',
 	},
@@ -949,13 +949,7 @@ const deepseekModelOptions = {
 			supportsReasoning: true,
 			canTurnOffReasoning: false,
 			canIOReasoning: true,
-			reasoningReservedOutputTokenSpace: 8192,
-			reasoningSlider: {
-				type: 'budget_slider',
-				min: 1024,
-				max: 8192,
-				default: 1024
-			},
+			reasoningReservedOutputTokenSpace: 1024,
 		},
 	},
 } as const satisfies { [s: string]: VoidStaticModelInfo }
