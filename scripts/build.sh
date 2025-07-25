@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 # 构建 Void 编辑器
 echo "开始构建 Void 编辑器..."
 
-npm run buildreact
+sudo npm run buildreact
 sudo npm run compile
 
 # 检测平台和架构
