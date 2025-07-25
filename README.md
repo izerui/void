@@ -48,8 +48,14 @@ You can always reach us in our Discord server or contact us via email: hello@voi
 ```
 sudo npm run watch
 ```
-
 这样就可以随时修改并刷新实现同步调试了.
+
+
+如果不需要监听文件变化可以使用:
+```
+sudo npm run compile
+```
+
 
 ## 打包
 

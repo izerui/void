@@ -124,7 +124,7 @@ export const QuickEditChat = ({
 					onChangeText_(newStr)
 				}, [onChangeText_])}
 				onKeyDown={(e) => {
-					if (e.key === 'Enter' && !e.shiftKey) {
+					if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
 						onSubmit()
 						return
 					}
