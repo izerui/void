@@ -2,7 +2,7 @@
 
 <div align="center">
   <img
-  	src="./src/vs/workbench/browser/parts/editor/media/slice_of_void.png"
+    src="./src/vs/workbench/browser/parts/editor/media/slice_of_void.png"
 	 	alt="Void 欢迎界面"
 		width="300"
 	 	height="300"
@@ -139,24 +139,37 @@ npm run buildreact:watch  # 监听模式自动编译
 
 ## 打包
 
-1. 先编译
+### 完整打包流程
+1. 先编译前端 React 代码
+```
+npm run buildreact
+```
+
+2. 再编译主程序
 ```
 sudo npm run compile
 ```
-2. 再打包
-Mac
-`npm run gulp vscode-darwin-arm64` - 最常见 (Apple Silicon)
-`npm run gulp vscode-darwin-x64` (Intel)
 
-Windows
-`npm run gulp vscode-win32-x64` - 最常见
-`npm run gulp vscode-win32-arm64`
+3. 最后打包
 
-Linux
-`npm run gulp vscode-linux-x64` - 最常见
-`npm run gulp vscode-linux-arm64`
+#### 平台特定打包命令
+**Mac**
+- `npm run gulp vscode-darwin-arm64` - 最常见 (Apple Silicon)
+- `npm run gulp vscode-darwin-x64` (Intel)
 
-或者使用一键打包:
+**Windows**
+- `npm run gulp vscode-win32-x64` - 最常见
+- `npm run gulp vscode-win32-arm64`
+
+**Linux**
+- `npm run gulp vscode-linux-x64` - 最常见
+- `npm run gulp vscode-linux-arm64`
+
+#### 一键打包
 ```
 ./build.sh
 ```
+
+### 注意事项
+- 打包前务必先执行 `npm run buildreact` 编译 React 组件
+- 否则打包的应用将不包含最新的前端代码
