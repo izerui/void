@@ -21,6 +21,8 @@ Void 是开源的 Cursor 替代品。
 
 - 🚙 [项目看板](https://github.com/orgs/voideditor/projects/2)
 
+- 🌌 [Download](https://voideditor.com/download-beta)
+
 
 ## 贡献代码
 
