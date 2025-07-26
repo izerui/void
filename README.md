@@ -3,173 +3,229 @@
 <div align="center">
   <img
     src="./src/vs/workbench/browser/parts/editor/media/slice_of_void.png"
-	 	alt="Void 欢迎界面"
-		width="300"
-	 	height="300"
-	/>
+    alt="Void 欢迎界面"
+    width="300"
+    height="300"
+  />
 </div>
 
-Void 是开源的 Cursor 替代品。
+<div align="center">
 
-在您的代码库上使用 AI 代理，检查点并可视化更改，并本地托管任何模型。Void 直接向提供商发送消息，不会保留您的数据。
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)
+![VSCode](https://img.shields.io/badge/VSCode-Extension-blue.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
 
-此仓库包含 Void 的完整源代码。如果您是新手，欢迎！
+**Void 是开源的 Cursor 替代品**
+在您的代码库上使用 AI 代理，检查点并可视化更改，并本地托管任何模型。
 
-- 🧭 [官网](https://voideditor.com)
+</div>
 
-- 👋 [Discord 社区](https://discord.gg/RSNjgaugJs)
+## 🚀 核心功能
 
-- 🚙 [项目看板](https://github.com/orgs/voideditor/projects/2)
+- 🤖 **AI 代码补全** - 基于 LLM 的智能补全，支持多行/单行
+- 💬 **对话式编程** - 线程式 AI 对话，支持文件上下文
+- ✏️ **可视化编辑** - 差异显示与确认，支持批量操作
+- 🔧 **工具扩展** - 支持 MCP 协议，可插拔工具系统
+- ⚙️ **多模型支持** - OpenAI/Anthropic/Gemini 无缝切换
+- 📁 **文件管理** - 智能文件操作和版本控制
+- 🖥️ **跨平台** - Windows/macOS/Linux 全平台支持
 
-- 🌌 [Download](https://voideditor.com/download-beta)
+## 📋 系统要求
 
+- **Node.js**: 16.0 或更高版本
+- **Python**: 3.8+ (用于某些工具)
+- **操作系统**: Windows 10+, macOS 10.14+, Ubuntu 18.04+
+- **内存**: 8GB RAM (推荐 16GB)
+- **存储**: 2GB 可用空间
 
-## 贡献代码
+## 🛠️ 快速开始
 
-1. 要开始为 Void 做贡献，请查看我们的项目看板！您也可以查看 [如何贡献](https://github.com/voideditor/void/blob/main/HOW_TO_CONTRIBUTE.md)。
+### 方法1: 使用预编译版本 (推荐)
 
-2. 欢迎参加我们 Discord 频道中的休闲周会！
+1. 从 [Releases](https://github.com/voideditor/void/releases) 下载对应平台的安装包
+2. 双击安装即可使用
 
+### 方法2: 从源码构建
 
-## 参考
+#### 一键构建
+```bash
+# 克隆项目
+git clone https://github.com/voideditor/void.git
+cd void
 
-Void 是 [vscode](https://github.com/microsoft/vscode) 仓库的分支。有关代码库指南，请参见 [VOID_CODEBASE_GUIDE](https://github.com/voideditor/void/blob/main/VOID_CODEBASE_GUIDE.md)。
-
-## 支持
-您始终可以在我们的 Discord 服务器上联系我们，或通过电子邮件：hello@voideditor.com 联系我们。
-
-
-## 项目架构
-
-Void 采用模块化设计，核心代码位于 `src/vs/workbench/contrib/void/`：
-
-### 核心模块
-
-#### browser/ - 浏览器端实现
-- **autocompleteService.ts** - 智能代码补全服务
-  - 基于 LLM 的代码预测
-  - 缓存机制优化
-  - 多行/单行补全策略
-
-- **chatThreadService.ts** - AI 对话管理服务
-  - 线程式对话管理
-  - 文件变更检查点
-  - 工具调用处理
-
-- **editCodeService.ts** - 代码编辑核心服务
-  - 差异显示与处理
-  - 流式编辑支持
-  - 撤销/重做管理
-
-- **react/** - React 前端组件
-  - Sidebar: 侧边栏聊天界面
-  - QuickEdit: 快速编辑弹窗
-  - Diff: 差异显示组件
-  - Settings: 设置界面
-
-#### common/ - 通用逻辑
-- 类型定义和接口规范
-- 配置管理系统
-- 工具实现和共享逻辑
-
-#### electron-main/ - 主进程实现
-- LLM 消息处理
-- 系统级功能
-- 主进程通信
-
-### 关键特性
-- 🤖 **AI 代码补全** - 基于 LLM 的智能补全
-- 💬 **对话式编程** - 线程式 AI 对话
-- ✏️ **可视化编辑** - 差异显示与确认
-- 🔧 **工具扩展** - 支持 MCP 协议
-- ⚙️ **多模型支持** - OpenAI/Anthropic/Gemini
-
-### 数据流设计
-```
-用户操作 → 服务层 → LLM 处理 → 结果展示 → 用户确认
-```
-
-## 开发
-
-### 快速开始
-1. 先用一个终端打开应用
-```
-./scripts/code.sh
-```
-
-2. 然后再开启一个终端开始监听文件变化
-```
-sudo npm run watch
-```
-这样就可以随时修改并刷新实现同步调试了.
-
-如果不需要监听文件变化可以使用:
-```
-sudo npm run compile
-```
-
-### React 组件开发
-修改 React 组件后需要重新编译：
-```
-npm run buildreact        # 手动编译
-npm run buildreact:watch  # 监听模式自动编译
-```
-
-### 开发指南
-1. **添加新功能**：
-   - 在对应目录创建服务文件
-   - 定义类型接口
-   - 实现业务逻辑
-   - 注册到 VSCode 服务系统
-
-2. **调试技巧**：
-   - 使用 VSCode 的调试工具
-   - 查看控制台输出
-   - 使用 React DevTools
-
-3. **性能优化**：
-   - 使用缓存机制
-   - 异步处理
-   - 增量更新
-
-### 扩展开发
-- **工具扩展**：支持 MCP 协议，可插拔工具系统
-- **模型扩展**：多模型支持，自定义配置
-- **UI 扩展**：React 组件化，可自定义主题
-
-## 打包
-
-### 完整打包流程
-1. 先编译前端 React 代码
-```
-npm run buildreact
-```
-
-2. 再编译主程序
-```
-sudo npm run compile
-```
-
-3. 最后打包
-
-#### 平台特定打包命令
-**Mac**
-- `npm run gulp vscode-darwin-arm64` - 最常见 (Apple Silicon)
-- `npm run gulp vscode-darwin-x64` (Intel)
-
-**Windows**
-- `npm run gulp vscode-win32-x64` - 最常见
-- `npm run gulp vscode-win32-arm64`
-
-**Linux**
-- `npm run gulp vscode-linux-x64` - 最常见
-- `npm run gulp vscode-linux-arm64`
-
-#### 一键打包
-```
+# 一键构建 (包含前端编译)
 ./build.sh
 ```
 
-### 注意事项
-- 打包前务必先执行 `npm run buildreact` 编译 React 组件
-- 否则打包的应用将不包含最新的前端代码
+#### 分步构建
+```bash
+# 1. 安装依赖
+npm install
+
+# 2. 编译前端 React 组件
+npm run buildreact
+
+# 3. 编译主程序
+npm run compile
+
+# 4. 运行开发版
+./scripts/code.sh
+```
+
+## 🔨 开发命令
+
+### 核心命令
+```bash
+# 开发环境
+npm run buildreact        # 编译 React 组件
+npm run buildreact:watch  # 监听 React 编译
+npm run compile          # 编译主程序
+npm run watch            # 监听主程序编译
+
+# 运行和调试
+./scripts/code.sh        # 启动开发版
+npm run test            # 运行测试
+npm run lint            # 代码检查
+```
+
+### 打包命令
+```bash
+# 完整打包流程
+npm run buildreact       # 1. 编译前端
+npm run compile          # 2. 编译主程序
+
+# 平台特定打包
+npm run gulp vscode-darwin-arm64    # Mac Apple Silicon
+npm run gulp vscode-darwin-x64      # Mac Intel
+npm run gulp vscode-win32-x64       # Windows
+npm run gulp vscode-linux-x64       # Linux
+
+# 一键打包
+./build.sh
+```
+
+## 🏗️ 项目架构
+
+```
+src/vs/workbench/contrib/void/
+├── browser/           # 浏览器端实现
+│   ├── autocompleteService.ts    # AI 代码补全
+│   ├── chatThreadService.ts      # 对话管理
+│   ├── editCodeService.ts        # 代码编辑
+│   ├── toolsService.ts           # 工具系统
+│   └── react/                    # React 前端
+├── common/            # 通用逻辑
+│   ├── voidSettingsService.ts    # 配置管理
+│   ├── sendLLMMessageService.ts  # LLM 通信
+│   └── toolsServiceTypes.ts      # 工具类型
+└── electron-main/     # 主进程实现
+    ├── sendLLMMessage.impl.ts    # LLM 消息处理
+    └── mcpChannel.ts             # MCP 协议支持
+```
+
+### 架构特点
+- **模块化设计** - 清晰的职责分离
+- **事件驱动** - 基于 VSCode 事件系统
+- **依赖注入** - 使用 VSCode 服务容器
+- **类型安全** - 完整的 TypeScript 支持
+
+## 🎨 界面预览
+
+### 主要界面
+- **侧边栏 AI 对话** - 线程式对话管理
+- **代码补全** - 智能内联补全
+- **差异视图** - 可视化代码变更
+- **设置面板** - 模型和工具配置
+
+## 🔧 开发环境
+
+### 推荐工具
+- **VSCode** - 官方开发环境
+- **Node.js** - 运行时环境
+- **uv** - Python 包管理 (可选)
+- **React DevTools** - 前端调试
+
+### 环境设置
+```bash
+# 安装 Node.js (推荐 18+)
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# 或 macOS
+brew install node
+```
+
+## 🐛 故障排除
+
+### 常见问题
+
+#### 1. React 组件不更新
+```bash
+# 解决方案：重新编译 React
+npm run buildreact
+```
+
+#### 2. 构建失败
+```bash
+# 清理并重新构建
+make clean
+npm run buildreact
+npm run compile
+```
+
+#### 3. 权限问题
+```bash
+# macOS/Linux
+sudo chown -R $(whoami) .
+```
+
+#### 4. 依赖问题
+```bash
+# 清理并重新安装
+rm -rf node_modules
+npm install
+```
+
+## 📄 许可证
+
+本项目采用 MIT 许可证。详情请查看 [LICENSE](LICENSE.txt) 文件。
+
+## 🤝 贡献指南
+
+### 如何贡献
+1. Fork 本项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
+
+### 开发规范
+- 遵循 TypeScript 最佳实践
+- 使用 VSCode 代码格式化
+- 添加必要的注释和文档
+
+## 📞 支持
+
+- 🐛 [提交 Issue](https://github.com/izerui/void/issues)
+- 💬 [Discord 社区](https://discord.gg/RSNjgaugJs)
+- 📧 邮件：liuyuhua69@gmail.com
+- 📖 [项目文档](https://voideditor.com/docs)
+
+## 🙏 致谢
+
+- [voideditor](https://voideditor.com) - voideditor
+- [VSCode](https://github.com/microsoft/vscode) - 基础框架
+- [TypeScript](https://www.typescriptlang.org) - 类型系统
+- [React](https://react.dev) - 前端框架
+- [Node.js](https://nodejs.org) - 运行时环境
+https://github.com/izerui/void
+---
+
+<div align="center">
+
+**⭐ 如果这个项目对您有帮助，请给我们一个星星！ ⭐**
+**💡 有任何问题，欢迎加入我们的 Discord 社区讨论！ 💡**
+
+</div>
