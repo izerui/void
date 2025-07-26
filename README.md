@@ -44,7 +44,7 @@
 
 ### 方法1: 使用预编译版本 (推荐)
 
-1. 从 [Releases](https://github.com/voideditor/void/releases) 下载对应平台的安装包
+1. 从 [Releases](https://github.com/izerui/void/releases) 下载对应平台的安装包
 2. 双击安装即可使用
 
 ### 方法2: 从源码构建
@@ -220,7 +220,7 @@ npm install
 - [TypeScript](https://www.typescriptlang.org) - 类型系统
 - [React](https://react.dev) - 前端框架
 - [Node.js](https://nodejs.org) - 运行时环境
-https://github.com/izerui/void
+
 ---
 
 <div align="center">
