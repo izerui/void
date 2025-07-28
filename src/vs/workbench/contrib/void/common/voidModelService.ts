@@ -44,14 +44,6 @@ class VoidModelService extends Disposable implements IVoidModelService {
 	initializeModel = async (uri: URI) => {
 		try {
 			if (uri.fsPath in this._modelRefOfURI) return;
-			// 检查文件是否存在
-			try {
-				await this._textFileService.read(uri);
-			} catch {
-				console.warn(`${uri.fsPath} 不存在`)
-				// 文件不存在，直接返回
-				return;
-			}
 			const editorModelRef = await this._textModelService.createModelReference(uri);
 			// Keep a strong reference to prevent disposal
 			this._modelRefOfURI[uri.fsPath] = editorModelRef;
