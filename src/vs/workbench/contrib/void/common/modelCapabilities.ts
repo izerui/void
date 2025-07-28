@@ -255,11 +255,21 @@ const defaultModelOptions = {
 // TODO!!! add openrouter common models
 // TODO!!! allow user to modify capabilities and tell them if autodetected model or falling back
 const openSourceModelOptions_assumingOAICompat = {
+	'kimi-k2-250711': {
+		contextWindow: 128_000,
+		reservedOutputTokenSpace: 8_192, // 8_000,
+		supportsFIM: false,
+		downloadable: false,
+		reasoningCapabilities: false,
+		specialToolFormat: 'openai-style',
+		supportsSystemMessage: 'system-role',
+	},
 	'deepseekR1': {
 		supportsFIM: false,
-		supportsSystemMessage: false,
 		reasoningCapabilities: { supportsReasoning: true, canTurnOffReasoning: false, canIOReasoning: true, openSourceThinkTags: ['<think>', '</think>'] },
 		contextWindow: 32_000, reservedOutputTokenSpace: 4_096,
+		specialToolFormat: 'openai-style',
+		supportsSystemMessage: 'system-role',
 	},
 	'deepseekCoderV3': {
 		supportsFIM: false,
@@ -425,6 +435,8 @@ const extensiveModelOptionsFallback: VoidStaticProviderInfo['modelOptionsFallbac
 	if (lower.includes('deepseek-r1') || lower.includes('deepseek-reasoner')) return toFallback(openSourceModelOptions_assumingOAICompat, 'deepseekR1')
 	if (lower.includes('deepseek') && lower.includes('v2')) return toFallback(openSourceModelOptions_assumingOAICompat, 'deepseekCoderV2')
 	if (lower.includes('deepseek')) return toFallback(openSourceModelOptions_assumingOAICompat, 'deepseekCoderV3')
+
+	if (lower.includes('kimi-k2')) return toFallback(openSourceModelOptions_assumingOAICompat, 'kimi-k2-250711')
 
 	if (lower.includes('llama3')) return toFallback(openSourceModelOptions_assumingOAICompat, 'llama3')
 	if (lower.includes('llama3.1')) return toFallback(openSourceModelOptions_assumingOAICompat, 'llama3.1')
@@ -934,7 +946,7 @@ const deepseekModelOptions = {
 		downloadable: false,
 		supportsFIM: false,
 		specialToolFormat: 'openai-style', // 添加OpenAI风格工具调用支持
-		supportsSystemMessage: 'separated',
+		supportsSystemMessage: 'system-role',
 	},
 	'deepseek-reasoner': {
 		...openSourceModelOptions_assumingOAICompat.deepseekCoderV2,
@@ -943,7 +955,7 @@ const deepseekModelOptions = {
 		cost: { cache_read: .14, input: .55, output: 2.19, },
 		downloadable: false,
 		specialToolFormat: 'openai-style',
-		supportsSystemMessage: 'separated',
+		supportsSystemMessage: 'system-role',
 		// 添加推理能力配置
 		reasoningCapabilities: {
 			supportsReasoning: true,

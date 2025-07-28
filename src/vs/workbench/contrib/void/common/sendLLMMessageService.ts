@@ -82,7 +82,7 @@ export class LLMMessageService extends Disposable implements ILLMMessageService 
 		this._register((this.channel.listen('onError_sendLLMMessage') satisfies Event<EventLLMMessageOnErrorParams>)(e => {
 			this.llmMessageHooks.onError[e.requestId]?.(e);
 			this._clearChannelHooks(e.requestId);
-			console.error('Error in LLMMessageService:', JSON.stringify(e))
+			console.error('Error in LLMMessageService:', JSON.stringify(e, null, 2))
 		}))
 		// .list()
 		this._register((this.channel.listen('onSuccess_list_ollama') satisfies Event<EventModelListOnSuccessParams<OllamaModelResponse>>)(e => {
@@ -127,15 +127,58 @@ export class LLMMessageService extends Disposable implements ILLMMessageService 
 		this.llmMessageHooks.onError[requestId] = onError
 		this.llmMessageHooks.onAbort[requestId] = onAbort // used internally only
 
+		const truncateContent = (s: string) => s.replace(/\r?\n/g, ' ').length > 100 ? s.replace(/\r?\n/g, ' ').slice(0, 100) + '...' : s.replace(/\r?\n/g, ' ');
+
 		// 使用更安全的方式进行调试日志
 		if (typeof console !== 'undefined' && console.log) {
-			console.log('======================================================')
-			console.log('参数 proxyParams: ', proxyParams)
-			console.log('参数 requestId: ', requestId)
-			console.log('参数 settingsOfProvider: ', settingsOfProvider)
-			console.log('参数 modelSelection: ', modelSelection)
-			console.log('参数 mcpTools: ', mcpTools)
-			console.log('======================================================')
+			console.group(`🤖 LLM调用日志 REQID:[${requestId}] 模型:[${modelSelection.modelName}] 对话模式:[${proxyParams.messagesType}] 智能体:[${proxyParams.chatMode}]`)
+
+			// 消息内容
+			if (proxyParams.messagesType === 'chatMessages' && proxyParams.messages?.length) {
+				proxyParams.messages.forEach((msg, idx) => {
+					let content = '';
+					if ('content' in msg && typeof msg.content === 'string') {
+						content = msg.content;
+					} else if ('parts' in msg && Array.isArray(msg.parts)) {
+						content = msg.parts.map(part => {
+							if ('text' in part) return part.text;
+							if ('functionCall' in part) return `[Function: ${part.functionCall?.name}]`;
+							return '';
+						}).join(' ');
+					} else {
+						content = JSON.stringify(msg, null, 2);
+					}
+					console.groupCollapsed(`💬 消息: [${idx}] [${msg.role}]: [${truncateContent(content)}]`)
+					console.log(`${content}`)
+					console.groupEnd()
+				})
+			}
+
+			// 系统提示词
+			if (proxyParams.separateSystemMessage) {
+				console.groupCollapsed('🎯 系统提示词:')
+				console.log(`   ${proxyParams.separateSystemMessage.substring(0, 200)}${proxyParams.separateSystemMessage.length > 200 ? '...' : ''}`)
+				console.groupEnd()
+			}
+
+			// MCP工具
+			if (mcpTools?.length) {
+				console.groupCollapsed('🔧 MCP工具:')
+				mcpTools.forEach(tool => {
+					console.log(`   - ${tool.name}: ${tool.description || '无描述'}`)
+				})
+				console.groupEnd()
+			} else {
+				console.log('🔧 MCP工具: 无')
+			}
+
+			// 完整参数（折叠）
+			console.groupCollapsed('📦 完整参数详情')
+			console.log('proxyParams:', proxyParams)
+			console.log('modelSelection:', modelSelection)
+			console.groupEnd()
+
+			console.groupEnd()
 		}
 
 		// params will be stripped of all its functions over the IPC channel
@@ -207,4 +250,3 @@ export class LLMMessageService extends Disposable implements ILLMMessageService 
 }
 
 registerSingleton(ILLMMessageService, LLMMessageService, InstantiationType.Eager);
-

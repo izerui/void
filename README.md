@@ -80,7 +80,7 @@ npm run compile
 ```bash
 # 开发环境
 npm run buildreact        # 编译 React 组件
-npm run buildreact:watch  # 监听 React 编译
+npm run watchreact  # 监听 React 编译
 npm run compile          # 编译主程序
 npm run watch            # 监听主程序编译
 
@@ -103,7 +103,7 @@ npm run gulp vscode-win32-x64       # Windows
 npm run gulp vscode-linux-x64       # Linux
 
 # 一键打包
-./build.sh
+./scripts/build.sh
 ```
 
 ## 🏗️ 项目架构
