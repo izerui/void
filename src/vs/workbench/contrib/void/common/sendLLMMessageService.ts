@@ -148,7 +148,8 @@ export class LLMMessageService extends Disposable implements ILLMMessageService 
 					} else {
 						content = JSON.stringify(msg, null, 2);
 					}
-					console.groupCollapsed(`💬 消息: [${idx}] [${msg.role}]: [${truncateContent(content)}]`)
+					let tool_call_id = msg.role === 'tool' ? `[${msg.tool_call_id}] ` || '' : ''
+					console.groupCollapsed(`💬 消息: [${idx}] [${msg.role}]: ${tool_call_id}[${truncateContent(content)}]`)
 					console.log(`${content}`)
 					console.groupEnd()
 				})
