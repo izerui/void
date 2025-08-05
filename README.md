@@ -221,7 +221,11 @@ npm install
 - [React](https://react.dev) - 前端框架
 - [Node.js](https://nodejs.org) - 运行时环境
 
+## 提示词参考
+- https://gist.github.com/sshh12/25ad2e40529b269a88b80e7cf1c38084
+
 ---
+
 
 <div align="center">
 
