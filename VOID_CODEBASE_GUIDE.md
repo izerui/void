@@ -73,11 +73,7 @@ Void has two types of Apply: **Fast Apply** (uses Search/Replace, see below), an
 
 When you click Apply and Fast Apply is enabled, we prompt the LLM to output Search/Replace block(s) like this:
 ```
-<<<<<<< ORIGINAL
 // original code goes here
-=======
-// replaced code goes here
->>>>>>> UPDATED
 ```
 This is what allows Void to quickly apply code even on 1000-line files. It's the same as asking the LLM to press Ctrl+F and enter in a search/replace query.
 
@@ -134,7 +130,7 @@ If you want to know how our build pipeline works, see our build repo [here](http
 
 For additional references, the Void team put together this list of links to get up and running with VSCode.
 <details>
-	
+
 
 #### Links for Beginners
 

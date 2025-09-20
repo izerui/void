@@ -480,6 +480,7 @@ const sendAnthropicChat = async ({ messages, providerName, onText, onFinalMessag
 
 	// instance
 	const anthropic = new Anthropic({
+		baseURL: 'https://openai.qiniu.com',
 		apiKey: thisConfig.apiKey,
 		dangerouslyAllowBrowser: true
 	});
